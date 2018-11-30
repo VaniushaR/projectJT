@@ -1,14 +1,15 @@
 {
-  "main.css": "/projectJT/static/css/main.c67202b3.chunk.css",
-  "main.js": "/projectJT/static/js/main.22c2d3c6.chunk.js",
-  "main.js.map": "/projectJT/static/js/main.22c2d3c6.chunk.js.map",
-  "static/js/1.f68dcc1a.chunk.js": "/projectJT/static/js/1.f68dcc1a.chunk.js",
-  "static/js/1.f68dcc1a.chunk.js.map": "/projectJT/static/js/1.f68dcc1a.chunk.js.map",
+  "main.css": "/projectJT/static/css/main.409fd177.chunk.css",
+  "main.js": "/projectJT/static/js/main.b83d2c11.chunk.js",
+  "main.js.map": "/projectJT/static/js/main.b83d2c11.chunk.js.map",
+  "static/js/1.49dd1c2e.chunk.js": "/projectJT/static/js/1.49dd1c2e.chunk.js",
+  "static/js/1.49dd1c2e.chunk.js.map": "/projectJT/static/js/1.49dd1c2e.chunk.js.map",
   "runtime~main.js": "/projectJT/static/js/runtime~main.81516fde.js",
   "runtime~main.js.map": "/projectJT/static/js/runtime~main.81516fde.js.map",
+  "static/css/main.409fd177.chunk.css.map": "/projectJT/static/css/main.409fd177.chunk.css.map",
+  "static/media/Logo.png": "/projectJT/static/media/Logo.345574cc.png",
   "static/media/logo.svg": "/projectJT/static/media/logo.5d5d9eef.svg",
-  "static/css/main.c67202b3.chunk.css.map": "/projectJT/static/css/main.c67202b3.chunk.css.map",
   "index.html": "/projectJT/index.html",
-  "precache-manifest.816120d91015eceb9c3021d944e54b01.js": "/projectJT/precache-manifest.816120d91015eceb9c3021d944e54b01.js",
+  "precache-manifest.2c57a989060dae89ad6418a39c442904.js": "/projectJT/precache-manifest.2c57a989060dae89ad6418a39c442904.js",
   "service-worker.js": "/projectJT/service-worker.js"
 }
