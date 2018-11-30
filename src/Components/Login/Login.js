@@ -11,9 +11,69 @@ import {
 import './Login.css';
 import Logo from '../../Assets/Logo.png';
 import Home from '../Home/Home';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import firebase from '../Services/Firebase';
 
 class Login extends Component {
-  constructor() {
+  state = { isSignedIn: false };
+  uiConfig = {
+    signInFlow: 'popup',
+    signInOptions: [
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID
+    ],
+    callbacks: {
+      signInSucces: () => false
+    }
+  };
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ isSignedIn: !!user });
+    });
+  }
+
+  render() {
+    //Conditional rendering:
+    return (
+      <div>
+        {this.state.isSignedIn ? (
+          <div>
+            <Home />
+          </div>
+        ) : (
+          <div className="card-login">
+            <Row>
+              <Col m={3} s={3} l={3} />
+              <Col m={6} s={6} l={6}>
+                <Card
+                  className="white"
+                  textClassName="black-text"
+                  title="Welcome"
+                  actions={[
+                    <div>
+                      <StyledFirebaseAuth
+                        uiConfig={this.uiConfig}
+                        firebaseAuth={firebase.auth()}
+                      />
+                    </div>
+                  ]}
+                >
+                  Sign in to Start!
+                </Card>
+              </Col>
+            </Row>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+
+export default Login;
+
+/*
+ constructor() {
     super();
     this.state = {
       user: null,
@@ -23,47 +83,4 @@ class Login extends Component {
     //this.LoginGoogle = this.LoginGoogle.bind(this);
     // this.handleLogout = this.handleLogout.bind(this);
   }
-
-  render() {
-    //View 1 Layout
-    return (
-      <div>
-        <div className="card-login">
-          <Row>
-            <Col m={3} s={3} l={3} />
-            <Col m={6} s={6} l={6}>
-              <Card
-                className="white"
-                textClassName="black-text"
-                title="Welcome"
-                actions={[
-                  <div>
-                    <a href="#">
-                      <Button className="waves-light red">
-                        <i class="fab fa-google" /> Google
-                      </Button>
-                    </a>
-                    <br />
-                    <br />
-                    <a href="#">
-                      <Button className="waves-light blue darken-3">
-                        <i class="fab fa-facebook" /> Facebook
-                      </Button>
-                    </a>
-                  </div>
-                ]}
-              >
-                Sign in to Start!
-              </Card>
-            </Col>
-          </Row>
-        </div>
-        <div>
-          <Home />
-        </div>
-      </div>
-    );
-  }
-}
-
-export default Login;
+*/

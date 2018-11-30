@@ -4,7 +4,6 @@ import './Navigation.css';
 import Logo from '../../Assets/Logo.png';
 import Login from '../Login/Login';
 import FooterC from '../Footer/Footer';
-import Splash from '../Splash/Splash';
 
 class NavBar extends Component {
   render() {
@@ -19,7 +18,6 @@ class NavBar extends Component {
           </NavItem>
         </Navbar>
         <Login />
-        <Splash />
         <FooterC />
       </div>
     );
