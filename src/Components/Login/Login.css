@@ -1,0 +1,29 @@
+.card-login {
+  margin-top: 8em;
+}
+
+@media only screen and (max-width: 992px) {
+  .hide-on-med-and-down {
+    display: block !important;
+  }
+  .logo {
+    display: none;
+  }
+  .nav {
+    height: 4em;
+    font-size: 1em;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .hide-on-small-only,
+  .hide-on-small-and-down {
+    display: block !important;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+}
+nav .button-collapse {
+  display: none;
+}
