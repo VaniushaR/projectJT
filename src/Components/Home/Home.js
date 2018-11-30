@@ -10,6 +10,7 @@ import {
 } from 'react-materialize';
 import './Home.css';
 import Logo from '../../Assets/Logo.png';
+import firebase from '../Services/Firebase';
 
 class Home extends Component {
   render() {
@@ -24,7 +25,7 @@ class Home extends Component {
             </Col>
           </NavItem>
 
-          <NavItem>
+          <NavItem onClick={() => firebase.auth().signOut()}>
             <span>Log Out</span> <i class="fas fa-sign-out-alt"> </i>
           </NavItem>
         </Navbar>
@@ -33,10 +34,16 @@ class Home extends Component {
             <h2>My projects</h2>
           </Col>
           <Col s={5} m={5} l={5}>
-            <h2 className="user-name">User Name</h2>
+            <h2 className="user-name">
+              {firebase.auth().currentUser.displayName}
+            </h2>
           </Col>
           <Col s={1} m={1} l={1}>
-            <img alt="user picture" src={Logo} className="user-pic" />
+            <img
+              alt="user picture"
+              src={firebase.auth().currentUser.photoURL}
+              className="user-pic"
+            />
           </Col>
         </Row>
         <section className="panel">

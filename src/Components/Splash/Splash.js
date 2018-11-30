@@ -5,7 +5,7 @@ class Splash extends Component {
   render() {
     return (
       <div>
-        <img src={Brand} alt="Brand Logo" />
+        <img className="brand-logo-splash" src={Brand} alt="Brand Logo" />
       </div>
     );
   }
