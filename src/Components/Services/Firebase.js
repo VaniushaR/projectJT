@@ -11,12 +11,17 @@ const config = {
 };
 firebase.initializeApp(config);
 
-//inicializamos firestore
-const db = firebase.firestore();
+//firestore initializer
+//Firestor initializer
+export const db = firebase.firestore();
+
+const firestore = firebase.firestore();
+const settings = { /* your settings... */ timestampsInSnapshots: true };
+firestore.settings(settings);
 
 export default firebase;
 
-//hacer login con gMail
+//Login with Google
 export const googleLogin = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase
@@ -25,7 +30,7 @@ export const googleLogin = () => {
     .then(result => console.log(`${result.user.email} ha iniciado sesión`))
     .catch(error => console.error(`Error ${error.code}: ${error.message}`));
 };
-
+//Login with Facebook
 export const LoginFB = () => {
   let provider = new firebase.auth.FacebookAuthProvider();
   firebase
@@ -34,7 +39,7 @@ export const LoginFB = () => {
     .then(result => console.log(`${result.user.email} ha iniciado sesión`))
     .catch(error => console.error(`Error ${error.code}: ${error.message}`));
 };
-
+//LogOut function
 export const handleLogout = () => {
   firebase
     .auth()
@@ -44,5 +49,3 @@ export const handleLogout = () => {
       console.log(`Ha ocurrido un error ${error.code}: ${error.message}`)
     );
 };
-
-//guardar orden

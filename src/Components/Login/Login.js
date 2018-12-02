@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
-import {
-  Row,
-  Col,
-  Card,
-  Button,
-  Navbar,
-  NavItem,
-  Icon
-} from 'react-materialize';
+import { Row, Col, Card } from 'react-materialize';
 import './Login.css';
-import Logo from '../../Assets/Logo.png';
 import Home from '../Home/Home';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from '../Services/Firebase';
+import Navigation from '../Navigation/Navigation';
 
 class Login extends Component {
   state = { isSignedIn: false };
@@ -39,6 +31,7 @@ class Login extends Component {
       <div>
         {this.state.isSignedIn ? (
           <div>
+            <Navigation />
             <Home />
           </div>
         ) : (
@@ -71,16 +64,3 @@ class Login extends Component {
 }
 
 export default Login;
-
-/*
- constructor() {
-    super();
-    this.state = {
-      user: null,
-      pictures: []
-    };
-    //this.LoginFB = this.LoginFB.bind(this);
-    //this.LoginGoogle = this.LoginGoogle.bind(this);
-    // this.handleLogout = this.handleLogout.bind(this);
-  }
-*/
