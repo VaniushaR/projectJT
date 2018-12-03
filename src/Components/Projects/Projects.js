@@ -1,66 +1,188 @@
 import React, { Component } from 'react';
-import { Card, Col } from 'react-materialize';
-import firebase from '../Services/Firebase';
 import { db } from '../Services/Firebase';
+import firebase from '../Services/Firebase';
+import { Col, Card } from 'react-materialize';
 
 class Projects extends Component {
-  constructor() {
-    super();
-    this.state = {
-      projects: []
-    };
-  }
-  //function to update the projects addet to the data base
+  state = {
+    items: [],
+    inputProject: '',
+    inputDescription: '',
+    user: '',
+    date: '',
+    edit: false,
+    id: ''
+  };
+
   componentDidMount() {
-    db.collection('projects')
-      .get()
-      .then(
-        snapShots => {
-          this.setState({
-            projects: snapShots.docs.map(item => {
-              return { id: item.id, data: item.data() };
-            })
-          });
-        },
-        error => {
-          console.log(error);
-        }
-      );
+    //reading from the db
+    db.collection('SquadProjectsApp').onSnapshot(
+      snapShots => {
+        this.setState({
+          items: snapShots.docs.map(doc => {
+            console.log(doc.data());
+            //console.log(doc.id);
+            return { id: doc.id, data: doc.data() };
+          })
+        });
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
+  //Edition of the name of the project selected
+  changeValue = e => {
+    this.setState({
+      inputProject: e.target.value
+    });
+  };
+  //Edition of the project description
+  changeDescription = e => {
+    this.setState({
+      inputDescription: e.target.value
+    });
+  };
+  //getting current date and user
+  action = () => {
+    const { inputProject, inputDescription, edit } = this.state;
+    //stting date and current user in the state
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1;
+    const yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+    today = mm + '/' + dd + '/' + yyyy;
+    //bolean to edit or add
+    !edit
+      ? db
+          .collection('SquadProjectsApp')
+          .add({
+            project: inputProject,
+            description: inputDescription,
+            date: today,
+            user: firebase.auth().currentUser.displayName
+          })
+          .then(() => {
+            console.log('Added');
+          })
+          .catch(() => {
+            console.log('something was wrong');
+          })
+      : this.update();
+  };
+
+  //getting an existind id of project and settinf the state
+  getProject = id => {
+    let docRef = db.collection('SquadProjectsApp').doc(id);
+    docRef
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          this.setState({
+            inputProject: doc.data().project,
+            inputDescription: doc.data().description,
+            edit: true,
+            id: doc.id
+          });
+        } else {
+          console.log('The doc does not exist!');
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+  //updating from and to the database:
+  update = () => {
+    const { id, inputProject, inputDescription } = this.state;
+    db.collection('SquadProjectsApp')
+      .doc(id)
+      .update({
+        project: inputProject,
+        description: inputDescription,
+        date: this.state.date,
+        user: this.state.user
+      })
+      .then(() => {
+        console.log('updated');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   render() {
+    const { items, inputProject, inputDescription } = this.state;
     return (
-      <div>
-        {this.state.projects && this.state.projects !== undefined
-          ? this.state.projects.map((item, key) => {
-              console.log(item.data, key);
-              console.log(item.data.AddProject.date);
-              const projectsDB = item.data.AddProject;
-              console.log(projectsDB.project);
-              return (
-                <Col m={6} s={12}>
-                  <Card
-                    key={key}
-                    className="white"
-                    textClassName="black-text"
-                    title={projectsDB.project}
-                    actions={[
-                      <div>
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>{' '}
-                      </div>
-                    ]}
-                  >
-                    <p>{projectsDB.date}</p>
-                    <p>{projectsDB.description}</p>
-                  </Card>
-                </Col>
-              );
-            })
+      <section className="panel">
+        <Col m={6} s={12}>
+          <Card
+            className="blue lighten-5"
+            textClassName="black-text"
+            title="Agregar nuevo"
+            actions={[
+              <a onClick={this.action}>{this.state.edit ? 'Update' : 'Add'}</a>
+            ]}
+          >
+            <input
+              placeholder="Project's Name"
+              value={inputProject}
+              onChange={this.changeValue}
+            />
+            <input
+              placeholder="Description"
+              value={inputDescription}
+              onChange={this.changeDescription}
+            />
+          </Card>
+        </Col>
+
+        {items && items !== undefined
+          ? items.map((item, key) => (
+              <Col key={key} m={6} s={12}>
+                <Card
+                  key={key}
+                  className="white"
+                  textClassName="black-text"
+                  title={item.data.project}
+                  actions={[
+                    <div>
+                      <a onClick={() => this.getProject(item.id)}>Edit</a>
+                      <a href="#">Delete</a>{' '}
+                    </div>
+                  ]}
+                >
+                  <div>{item.data.description}</div>
+                  <p>{item.data.date}</p>
+                  <p>{item.data.user}</p>
+                </Card>
+              </Col>
+            ))
           : null}
-      </div>
+      </section>
     );
   }
 }
 
 export default Projects;
+
+/*
+<Col m={6} s={12}>
+                  <Card
+                    className="blue lighten-5"
+                    textClassName="black-text"
+                    title="Agregar nuevo"
+                    actions={[<a>ADD</a>]}
+                  >
+                    <input placeholder="Project's Name" id="input-n" />
+                    <input placeholder="Description" />
+                  </Card>
+                </Col>
+
+*/
