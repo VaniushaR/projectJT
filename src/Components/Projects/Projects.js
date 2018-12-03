@@ -73,7 +73,7 @@ class Projects extends Component {
           .catch(() => {
             console.log('something was wrong');
           })
-      : this.update();
+      : this.update(today);
   };
 
   //getting an existind id of project and settinf the state
@@ -98,15 +98,15 @@ class Projects extends Component {
       });
   };
   //updating from and to the database:
-  update = () => {
+  update = today => {
     const { id, inputProject, inputDescription } = this.state;
     db.collection('SquadProjectsApp')
       .doc(id)
       .update({
         project: inputProject,
         description: inputDescription,
-        date: this.state.date,
-        user: this.state.user
+        date: today,
+        user: firebase.auth().currentUser.displayName
       })
       .then(() => {
         console.log('updated');
