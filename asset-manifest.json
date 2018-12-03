@@ -1,7 +1,7 @@
 {
   "main.css": "/projectJT/static/css/main.1af03305.chunk.css",
-  "main.js": "/projectJT/static/js/main.12077a62.chunk.js",
-  "main.js.map": "/projectJT/static/js/main.12077a62.chunk.js.map",
+  "main.js": "/projectJT/static/js/main.a69bcc61.chunk.js",
+  "main.js.map": "/projectJT/static/js/main.a69bcc61.chunk.js.map",
   "static/js/1.fa490a2c.chunk.js": "/projectJT/static/js/1.fa490a2c.chunk.js",
   "static/js/1.fa490a2c.chunk.js.map": "/projectJT/static/js/1.fa490a2c.chunk.js.map",
   "runtime~main.js": "/projectJT/static/js/runtime~main.81516fde.js",
@@ -9,6 +9,6 @@
   "static/media/Logo.png": "/projectJT/static/media/Logo.345574cc.png",
   "static/css/main.1af03305.chunk.css.map": "/projectJT/static/css/main.1af03305.chunk.css.map",
   "index.html": "/projectJT/index.html",
-  "precache-manifest.98fc8ef0839d22a3018e096d86f90580.js": "/projectJT/precache-manifest.98fc8ef0839d22a3018e096d86f90580.js",
+  "precache-manifest.63aec7a2ff97d1cecfbc782df556b627.js": "/projectJT/precache-manifest.63aec7a2ff97d1cecfbc782df556b627.js",
   "service-worker.js": "/projectJT/service-worker.js"
 }
