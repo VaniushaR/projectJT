@@ -11,12 +11,11 @@ const config = {
 };
 firebase.initializeApp(config);
 
-//firestore initializer
 //Firestor initializer
 export const db = firebase.firestore();
 
 const firestore = firebase.firestore();
-const settings = { /* your settings... */ timestampsInSnapshots: true };
+const settings = { timestampsInSnapshots: true };
 firestore.settings(settings);
 
 export default firebase;
@@ -30,6 +29,7 @@ export const googleLogin = () => {
     .then(result => console.log(`${result.user.email} ha iniciado sesión`))
     .catch(error => console.error(`Error ${error.code}: ${error.message}`));
 };
+
 //Login with Facebook
 export const LoginFB = () => {
   let provider = new firebase.auth.FacebookAuthProvider();
@@ -39,6 +39,7 @@ export const LoginFB = () => {
     .then(result => console.log(`${result.user.email} ha iniciado sesión`))
     .catch(error => console.error(`Error ${error.code}: ${error.message}`));
 };
+
 //LogOut function
 export const handleLogout = () => {
   firebase

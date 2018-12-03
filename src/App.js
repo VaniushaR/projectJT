@@ -20,7 +20,6 @@ class App extends Component {
   }
 
   render() {
-    //conditional rendering:
     if (!this.state.splashEnded) {
       return <Splash />;
     }

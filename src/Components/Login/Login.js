@@ -44,7 +44,7 @@ class Login extends Component {
                   textClassName="black-text"
                   title="Welcome"
                   actions={[
-                    <div>
+                    <div key={1}>
                       <StyledFirebaseAuth
                         uiConfig={this.uiConfig}
                         firebaseAuth={firebase.auth()}

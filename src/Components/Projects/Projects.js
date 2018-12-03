@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { db } from '../Services/Firebase';
 import firebase from '../Services/Firebase';
 import { Col, Card } from 'react-materialize';
+import './Projects.css';
 
 class Projects extends Component {
   state = {
@@ -20,8 +21,6 @@ class Projects extends Component {
       snapShots => {
         this.setState({
           items: snapShots.docs.map(doc => {
-            console.log(doc.data());
-            //console.log(doc.id);
             return { id: doc.id, data: doc.data() };
           })
         });
@@ -117,11 +116,17 @@ class Projects extends Component {
       });
   };
 
+  deleteItem = id => {
+    db.collection('SquadProjectsApp')
+      .doc(id)
+      .delete();
+  };
+
   render() {
     const { items, inputProject, inputDescription } = this.state;
     return (
       <section className="panel">
-        <Col m={6} s={12}>
+        <Col m={6} s={10}>
           <Card
             className="blue lighten-5"
             textClassName="black-text"
@@ -142,10 +147,9 @@ class Projects extends Component {
             />
           </Card>
         </Col>
-
         {items && items !== undefined
           ? items.map((item, key) => (
-              <Col key={key} m={6} s={12}>
+              <Col key={key} m={6} s={10}>
                 <Card
                   key={key}
                   className="white"
@@ -153,14 +157,32 @@ class Projects extends Component {
                   title={item.data.project}
                   actions={[
                     <div>
-                      <a onClick={() => this.getProject(item.id)}>Edit</a>
-                      <a href="#">Delete</a>{' '}
+                      <a
+                        key={key}
+                        onClick={() => {
+                          this.getProject(item.id);
+                        }}
+                      >
+                        Edit
+                      </a>
+                      <a
+                        onClick={() => {
+                          this.deleteItem(item.id);
+                        }}
+                      >
+                        Delete
+                      </a>
                     </div>
                   ]}
                 >
-                  <div>{item.data.description}</div>
-                  <p>{item.data.date}</p>
-                  <p>{item.data.user}</p>
+                  <br />
+                  <p className="description">{item.data.description}</p>
+                  <br />
+                  <p>Added at {item.data.date}</p>
+                  <br />
+                  <p>
+                    by<a> {item.data.user}.</a>
+                  </p>
                 </Card>
               </Col>
             ))
