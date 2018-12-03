@@ -1,27 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Navbar, NavItem } from 'react-materialize';
-import './Navigation.css';
-import Logo from '../../Assets/Logo.png';
-import Login from '../Login/Login';
-import FooterC from '../Footer/Footer';
+import firebase from '../Services/Firebase';
 
-class NavBar extends Component {
-  render() {
-    return (
-      <div>
-        <Navbar
-          brand="Squad Projects App"
-          className="nav pink lighten-3 center-align "
-        >
-          <NavItem>
-            <img className="logo" src={Logo} alt="Logo" />
-          </NavItem>
-        </Navbar>
-        <Login />
-        <FooterC />
-      </div>
-    );
-  }
-}
+const Navigation = () => {
+  return (
+    <div>
+      <Navbar brand="🤓" className="pink lighten-4 login-nav" right>
+        <NavItem href="https://vaniushar.github.io">Portfolio</NavItem>
+        <NavItem href="https://github.com/VaniushaR/projectJT">Code</NavItem>
+        <NavItem onClick={() => firebase.auth().signOut()}>
+          <i className="fas fa-sign-out-alt" />
+        </NavItem>
+      </Navbar>
+    </div>
+  );
+};
 
-export default NavBar;
+export default Navigation;

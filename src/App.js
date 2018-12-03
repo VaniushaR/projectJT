@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Navigation from './Components/Navigation/Navigation';
+import Brand from './Components/Brand/Brand';
+import FooterC from './Components/Footer/Footer';
+import Login from './Components/Login/Login';
 import Splash from './Components/Splash/Splash';
 
 class App extends Component {
@@ -19,13 +20,14 @@ class App extends Component {
   }
 
   render() {
-    //conditional rendering:
     if (!this.state.splashEnded) {
       return <Splash />;
     }
     return (
       <div>
-        <Navigation />
+        <Brand />
+        <Login />
+        <FooterC />
       </div>
     );
   }
